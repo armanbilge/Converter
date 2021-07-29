@@ -13,7 +13,7 @@ class SharedBuilder_RefProps171925374[R <: js.Object] (val args: js.Array[js.Any
   
   inline def innerRef(value: typingsJapgolly.react.mod.Ref[js.Any]): this.type = set("innerRef", value.asInstanceOf[js.Any])
   
-  inline def innerRefFunction1[F[_]](value: /* instance */ js.Any | Null => F[Unit])(implicit _sync: Sync[F]): this.type = set("innerRef", js.Any.fromFunction1((t0: /* instance */ js.Any | Null) => _sync.runSync(value(t0))))
+  inline def innerRefFunction1[F[_]: Sync](value: /* instance */ js.Any | Null => F[Unit]): this.type = set("innerRef", js.Any.fromFunction1((t0: /* instance */ js.Any | Null) => implicitly[Sync[F]].runSync(value(t0))))
   
   inline def innerRefNull: this.type = set("innerRef", null)
 }

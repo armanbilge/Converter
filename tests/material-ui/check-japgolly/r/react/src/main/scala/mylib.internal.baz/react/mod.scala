@@ -104,7 +104,7 @@ private[internal] object mod {
       
       inline def setOnClick(value: Double | (js.Function1[/* x */ String, Unit])): Self = StObject.set(x, "onClick", value.asInstanceOf[js.Any])
       
-      inline def setOnClickFunction1[F[_]](value: /* x */ String => F[Unit])(implicit _sync: Sync[F]): Self = StObject.set(x, "onClick", js.Any.fromFunction1((t0: /* x */ String) => _sync.runSync(value(t0))))
+      inline def setOnClickFunction1[F[_]: Sync](value: /* x */ String => F[Unit]): Self = StObject.set(x, "onClick", js.Any.fromFunction1((t0: /* x */ String) => implicitly[Sync[F]].runSync(value(t0))))
       
       inline def setOnClickUndefined: Self = StObject.set(x, "onClick", js.undefined)
     }

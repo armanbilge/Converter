@@ -43,7 +43,7 @@ trait BaseSyntheticEvent[E, C, T] extends StObject {
 }
 object BaseSyntheticEvent {
   
-  inline def apply[F[_], E, C, T](
+  inline def apply[F[_]: Sync, E, C, T](
     bubbles: Boolean,
     cancelable: Boolean,
     currentTarget: C,
@@ -59,10 +59,8 @@ object BaseSyntheticEvent {
     target: T,
     timeStamp: Double,
     `type`: String
-  )(
-    implicit _sync: Sync[F]
   ): BaseSyntheticEvent[E, C, T] = {
-    val __obj = js.Dynamic.literal(bubbles = bubbles.asInstanceOf[js.Any], cancelable = cancelable.asInstanceOf[js.Any], currentTarget = currentTarget.asInstanceOf[js.Any], defaultPrevented = defaultPrevented.asInstanceOf[js.Any], eventPhase = eventPhase.asInstanceOf[js.Any], isDefaultPrevented = _sync.toJsFn(isDefaultPrevented), isPropagationStopped = _sync.toJsFn(isPropagationStopped), isTrusted = isTrusted.asInstanceOf[js.Any], nativeEvent = nativeEvent.asInstanceOf[js.Any], persist = _sync.toJsFn(persist), preventDefault = _sync.toJsFn(preventDefault), stopPropagation = _sync.toJsFn(stopPropagation), target = target.asInstanceOf[js.Any], timeStamp = timeStamp.asInstanceOf[js.Any])
+    val __obj = js.Dynamic.literal(bubbles = bubbles.asInstanceOf[js.Any], cancelable = cancelable.asInstanceOf[js.Any], currentTarget = currentTarget.asInstanceOf[js.Any], defaultPrevented = defaultPrevented.asInstanceOf[js.Any], eventPhase = eventPhase.asInstanceOf[js.Any], isDefaultPrevented = implicitly[Sync[F]].toJsFn(isDefaultPrevented), isPropagationStopped = implicitly[Sync[F]].toJsFn(isPropagationStopped), isTrusted = isTrusted.asInstanceOf[js.Any], nativeEvent = nativeEvent.asInstanceOf[js.Any], persist = implicitly[Sync[F]].toJsFn(persist), preventDefault = implicitly[Sync[F]].toJsFn(preventDefault), stopPropagation = implicitly[Sync[F]].toJsFn(stopPropagation), target = target.asInstanceOf[js.Any], timeStamp = timeStamp.asInstanceOf[js.Any])
     __obj.updateDynamic("type")(`type`.asInstanceOf[js.Any])
     __obj.asInstanceOf[BaseSyntheticEvent[E, C, T]]
   }
@@ -79,19 +77,19 @@ object BaseSyntheticEvent {
     
     inline def setEventPhase(value: Double): Self = StObject.set(x, "eventPhase", value.asInstanceOf[js.Any])
     
-    inline def setIsDefaultPrevented[F[_]](value: F[Boolean])(implicit _sync: Sync[F]): Self = StObject.set(x, "isDefaultPrevented", _sync.toJsFn(value))
+    inline def setIsDefaultPrevented[F[_]: Sync](value: F[Boolean]): Self = StObject.set(x, "isDefaultPrevented", implicitly[Sync[F]].toJsFn(value))
     
-    inline def setIsPropagationStopped[F[_]](value: F[Boolean])(implicit _sync: Sync[F]): Self = StObject.set(x, "isPropagationStopped", _sync.toJsFn(value))
+    inline def setIsPropagationStopped[F[_]: Sync](value: F[Boolean]): Self = StObject.set(x, "isPropagationStopped", implicitly[Sync[F]].toJsFn(value))
     
     inline def setIsTrusted(value: Boolean): Self = StObject.set(x, "isTrusted", value.asInstanceOf[js.Any])
     
     inline def setNativeEvent(value: E): Self = StObject.set(x, "nativeEvent", value.asInstanceOf[js.Any])
     
-    inline def setPersist[F[_]](value: F[Unit])(implicit _sync: Sync[F]): Self = StObject.set(x, "persist", _sync.toJsFn(value))
+    inline def setPersist[F[_]: Sync](value: F[Unit]): Self = StObject.set(x, "persist", implicitly[Sync[F]].toJsFn(value))
     
-    inline def setPreventDefault[F[_]](value: F[Unit])(implicit _sync: Sync[F]): Self = StObject.set(x, "preventDefault", _sync.toJsFn(value))
+    inline def setPreventDefault[F[_]: Sync](value: F[Unit]): Self = StObject.set(x, "preventDefault", implicitly[Sync[F]].toJsFn(value))
     
-    inline def setStopPropagation[F[_]](value: F[Unit])(implicit _sync: Sync[F]): Self = StObject.set(x, "stopPropagation", _sync.toJsFn(value))
+    inline def setStopPropagation[F[_]: Sync](value: F[Unit]): Self = StObject.set(x, "stopPropagation", implicitly[Sync[F]].toJsFn(value))
     
     inline def setTarget(value: T): Self = StObject.set(x, "target", value.asInstanceOf[js.Any])
     

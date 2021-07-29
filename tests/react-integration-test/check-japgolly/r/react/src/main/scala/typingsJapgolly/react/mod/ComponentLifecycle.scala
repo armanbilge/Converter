@@ -62,19 +62,17 @@ object ComponentLifecycle {
   
   extension [Self <: ComponentLifecycle[?, ?, ?], P, S, SS](x: Self & (ComponentLifecycle[P, S, SS])) {
     
-    inline def setComponentDidCatch[F[_]](
+    inline def setComponentDidCatch[F[_]: Sync](
       value: (/* import warning: transforms.QualifyReferences#resolveTypeRef many Couldn't qualify Error */ /* error */ js.Any, /* errorInfo */ ErrorInfo) => F[Unit]
-    )(
-      implicit _sync: Sync[F]
-    ): Self = StObject.set(x, "componentDidCatch", js.Any.fromFunction2((t0: /* import warning: transforms.QualifyReferences#resolveTypeRef many Couldn't qualify Error */ /* error */ js.Any, t1: /* errorInfo */ ErrorInfo) => _sync.runSync(value(t0, t1))))
+    ): Self = StObject.set(x, "componentDidCatch", js.Any.fromFunction2((t0: /* import warning: transforms.QualifyReferences#resolveTypeRef many Couldn't qualify Error */ /* error */ js.Any, t1: /* errorInfo */ ErrorInfo) => implicitly[Sync[F]].runSync(value(t0, t1))))
     
     inline def setComponentDidCatchUndefined: Self = StObject.set(x, "componentDidCatch", js.undefined)
     
-    inline def setComponentDidMount[F[_]](value: F[Unit])(implicit _sync: Sync[F]): Self = StObject.set(x, "componentDidMount", _sync.toJsFn(value))
+    inline def setComponentDidMount[F[_]: Sync](value: F[Unit]): Self = StObject.set(x, "componentDidMount", implicitly[Sync[F]].toJsFn(value))
     
     inline def setComponentDidMountUndefined: Self = StObject.set(x, "componentDidMount", js.undefined)
     
-    inline def setComponentWillUnmount[F[_]](value: F[Unit])(implicit _sync: Sync[F]): Self = StObject.set(x, "componentWillUnmount", _sync.toJsFn(value))
+    inline def setComponentWillUnmount[F[_]: Sync](value: F[Unit]): Self = StObject.set(x, "componentWillUnmount", implicitly[Sync[F]].toJsFn(value))
     
     inline def setComponentWillUnmountUndefined: Self = StObject.set(x, "componentWillUnmount", js.undefined)
     

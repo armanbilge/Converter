@@ -11,13 +11,13 @@ trait ChildContextProvider[CC] extends StObject {
 }
 object ChildContextProvider {
   
-  inline def apply[F[_], CC](getChildContext: F[CC])(implicit _sync: Sync[F]): ChildContextProvider[CC] = {
-    val __obj = js.Dynamic.literal(getChildContext = _sync.toJsFn(getChildContext))
+  inline def apply[F[_]: Sync, CC](getChildContext: F[CC]): ChildContextProvider[CC] = {
+    val __obj = js.Dynamic.literal(getChildContext = implicitly[Sync[F]].toJsFn(getChildContext))
     __obj.asInstanceOf[ChildContextProvider[CC]]
   }
   
   extension [Self <: ChildContextProvider[?], CC](x: Self & ChildContextProvider[CC]) {
     
-    inline def setGetChildContext[F[_]](value: F[CC])(implicit _sync: Sync[F]): Self = StObject.set(x, "getChildContext", _sync.toJsFn(value))
+    inline def setGetChildContext[F[_]: Sync](value: F[CC]): Self = StObject.set(x, "getChildContext", implicitly[Sync[F]].toJsFn(value))
   }
 }

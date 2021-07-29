@@ -99,11 +99,9 @@ object accordionPanelMod {
       
       inline def setIndexUndefined: Self = StObject.set(x, "index", js.undefined)
       
-      inline def setOnTitleClick[F[_]](
+      inline def setOnTitleClick[F[_]: Sync](
         value: (/* event */ ReactMouseEventFrom[HTMLDivElement], /* data */ AccordionTitleProps) => F[Unit]
-      )(
-        implicit _sync: Sync[F]
-      ): Self = StObject.set(x, "onTitleClick", js.Any.fromFunction2((t0: /* event */ ReactMouseEventFrom[HTMLDivElement], t1: /* data */ AccordionTitleProps) => _sync.runSync(value(t0, t1))))
+      ): Self = StObject.set(x, "onTitleClick", js.Any.fromFunction2((t0: /* event */ ReactMouseEventFrom[HTMLDivElement], t1: /* data */ AccordionTitleProps) => implicitly[Sync[F]].runSync(value(t0, t1))))
       
       inline def setOnTitleClickUndefined: Self = StObject.set(x, "onTitleClick", js.undefined)
       

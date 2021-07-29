@@ -31,16 +31,14 @@ object typesMod {
   }
   object EventListenerOptions {
     
-    inline def apply[F[_], T /* <: EventTypes */](
+    inline def apply[F[_]: Sync, T /* <: EventTypes */](
       listener: /* import warning: importer.ImportType#apply Failed type conversion: / * import warning: transforms.QualifyReferences#resolveTypeRef many Couldn't qualify DocumentEventMap * / any[T] */ /* e */ js.Any => F[Unit],
       targetRef: RefHandle[
           /* import warning: transforms.QualifyReferences#resolveTypeRef many Couldn't qualify Node */ js.Any
         ],
       `type`: T
-    )(
-      implicit _sync: Sync[F]
     ): EventListenerOptions[T] = {
-      val __obj = js.Dynamic.literal(listener = js.Any.fromFunction1((t0: /* import warning: importer.ImportType#apply Failed type conversion: / * import warning: transforms.QualifyReferences#resolveTypeRef many Couldn't qualify DocumentEventMap * / any[T] */ /* e */ js.Any) => _sync.runSync(listener(t0))), targetRef = targetRef.asInstanceOf[js.Any])
+      val __obj = js.Dynamic.literal(listener = js.Any.fromFunction1((t0: /* import warning: importer.ImportType#apply Failed type conversion: / * import warning: transforms.QualifyReferences#resolveTypeRef many Couldn't qualify DocumentEventMap * / any[T] */ /* e */ js.Any) => implicitly[Sync[F]].runSync(listener(t0))), targetRef = targetRef.asInstanceOf[js.Any])
       __obj.updateDynamic("type")(`type`.asInstanceOf[js.Any])
       __obj.asInstanceOf[EventListenerOptions[T]]
     }
@@ -51,11 +49,9 @@ object typesMod {
       
       inline def setCaptureUndefined: Self = StObject.set(x, "capture", js.undefined)
       
-      inline def setListener[F[_]](
+      inline def setListener[F[_]: Sync](
         value: /* import warning: importer.ImportType#apply Failed type conversion: / * import warning: transforms.QualifyReferences#resolveTypeRef many Couldn't qualify DocumentEventMap * / any[T] */ /* e */ js.Any => F[Unit]
-      )(
-        implicit _sync: Sync[F]
-      ): Self = StObject.set(x, "listener", js.Any.fromFunction1((t0: /* import warning: importer.ImportType#apply Failed type conversion: / * import warning: transforms.QualifyReferences#resolveTypeRef many Couldn't qualify DocumentEventMap * / any[T] */ /* e */ js.Any) => _sync.runSync(value(t0))))
+      ): Self = StObject.set(x, "listener", js.Any.fromFunction1((t0: /* import warning: importer.ImportType#apply Failed type conversion: / * import warning: transforms.QualifyReferences#resolveTypeRef many Couldn't qualify DocumentEventMap * / any[T] */ /* e */ js.Any) => implicitly[Sync[F]].runSync(value(t0))))
       
       inline def setTargetRef(
         value: RefHandle[

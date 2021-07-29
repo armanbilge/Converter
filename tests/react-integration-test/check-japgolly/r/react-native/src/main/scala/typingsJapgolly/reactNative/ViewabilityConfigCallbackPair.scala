@@ -21,7 +21,7 @@ object ViewabilityConfigCallbackPair {
   
   extension [Self <: ViewabilityConfigCallbackPair](x: Self) {
     
-    inline def setOnViewableItemsChanged[F[_]](value: /* info */ Changed => F[Unit])(implicit _sync: Sync[F]): Self = StObject.set(x, "onViewableItemsChanged", js.Any.fromFunction1((t0: /* info */ Changed) => _sync.runSync(value(t0))))
+    inline def setOnViewableItemsChanged[F[_]: Sync](value: /* info */ Changed => F[Unit]): Self = StObject.set(x, "onViewableItemsChanged", js.Any.fromFunction1((t0: /* info */ Changed) => implicitly[Sync[F]].runSync(value(t0))))
     
     inline def setOnViewableItemsChangedNull: Self = StObject.set(x, "onViewableItemsChanged", null)
     

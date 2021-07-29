@@ -130,7 +130,7 @@ object mod {
       
       inline def setId(value: String): Self = StObject.set(x, "id", value.asInstanceOf[js.Any])
       
-      inline def setOnHide[F[_]](value: /* event */ js.Any => F[Unit])(implicit _sync: Sync[F]): Self = StObject.set(x, "onHide", js.Any.fromFunction1((t0: /* event */ js.Any) => _sync.runSync(value(t0))))
+      inline def setOnHide[F[_]: Sync](value: /* event */ js.Any => F[Unit]): Self = StObject.set(x, "onHide", js.Any.fromFunction1((t0: /* event */ js.Any) => implicitly[Sync[F]].runSync(value(t0))))
       
       inline def setOnHideUndefined: Self = StObject.set(x, "onHide", js.undefined)
       
@@ -143,15 +143,13 @@ object mod {
             ]) | js.Function
       ): Self = StObject.set(x, "onMouseLeave", value.asInstanceOf[js.Any])
       
-      inline def setOnMouseLeaveFunction3[F[_]](
+      inline def setOnMouseLeaveFunction3[F[_]: Sync](
         value: (/* event */ ReactMouseEventFrom[HTMLElement], /* import warning: transforms.QualifyReferences#resolveTypeRef many Couldn't qualify Object */ /* data */ js.Any, /* target */ HTMLElement) => F[Unit]
-      )(
-        implicit _sync: Sync[F]
-      ): Self = StObject.set(x, "onMouseLeave", js.Any.fromFunction3((t0: /* event */ ReactMouseEventFrom[HTMLElement], t1: /* import warning: transforms.QualifyReferences#resolveTypeRef many Couldn't qualify Object */ /* data */ js.Any, t2: /* target */ HTMLElement) => _sync.runSync(value(t0, t1, t2))))
+      ): Self = StObject.set(x, "onMouseLeave", js.Any.fromFunction3((t0: /* event */ ReactMouseEventFrom[HTMLElement], t1: /* import warning: transforms.QualifyReferences#resolveTypeRef many Couldn't qualify Object */ /* data */ js.Any, t2: /* target */ HTMLElement) => implicitly[Sync[F]].runSync(value(t0, t1, t2))))
       
       inline def setOnMouseLeaveUndefined: Self = StObject.set(x, "onMouseLeave", js.undefined)
       
-      inline def setOnShow[F[_]](value: /* event */ js.Any => F[Unit])(implicit _sync: Sync[F]): Self = StObject.set(x, "onShow", js.Any.fromFunction1((t0: /* event */ js.Any) => _sync.runSync(value(t0))))
+      inline def setOnShow[F[_]: Sync](value: /* event */ js.Any => F[Unit]): Self = StObject.set(x, "onShow", js.Any.fromFunction1((t0: /* event */ js.Any) => implicitly[Sync[F]].runSync(value(t0))))
       
       inline def setOnShowUndefined: Self = StObject.set(x, "onShow", js.undefined)
       
@@ -273,11 +271,9 @@ object mod {
             ]) | js.Function
       ): Self = StObject.set(x, "onClick", value.asInstanceOf[js.Any])
       
-      inline def setOnClickFunction3[F[_]](
+      inline def setOnClickFunction3[F[_]: Sync](
         value: (/* event */ ReactTouchEventFrom[HTMLDivElement] | ReactMouseEventFrom[HTMLDivElement], /* import warning: transforms.QualifyReferences#resolveTypeRef many Couldn't qualify Object */ /* data */ js.Any, /* target */ HTMLElement) => F[Unit]
-      )(
-        implicit _sync: Sync[F]
-      ): Self = StObject.set(x, "onClick", js.Any.fromFunction3((t0: /* event */ ReactTouchEventFrom[HTMLDivElement] | ReactMouseEventFrom[HTMLDivElement], t1: /* import warning: transforms.QualifyReferences#resolveTypeRef many Couldn't qualify Object */ /* data */ js.Any, t2: /* target */ HTMLElement) => _sync.runSync(value(t0, t1, t2))))
+      ): Self = StObject.set(x, "onClick", js.Any.fromFunction3((t0: /* event */ ReactTouchEventFrom[HTMLDivElement] | ReactMouseEventFrom[HTMLDivElement], t1: /* import warning: transforms.QualifyReferences#resolveTypeRef many Couldn't qualify Object */ /* data */ js.Any, t2: /* target */ HTMLElement) => implicitly[Sync[F]].runSync(value(t0, t1, t2))))
       
       inline def setOnClickUndefined: Self = StObject.set(x, "onClick", js.undefined)
       
@@ -340,11 +336,9 @@ object mod {
             ]) | js.Function
       ): Self = StObject.set(x, "onClick", value.asInstanceOf[js.Any])
       
-      inline def setOnClickFunction3[F[_]](
+      inline def setOnClickFunction3[F[_]: Sync](
         value: (/* event */ ReactTouchEventFrom[HTMLDivElement] | ReactMouseEventFrom[HTMLDivElement], /* import warning: transforms.QualifyReferences#resolveTypeRef many Couldn't qualify Object */ /* data */ js.Any, /* target */ HTMLElement) => F[Unit]
-      )(
-        implicit _sync: Sync[F]
-      ): Self = StObject.set(x, "onClick", js.Any.fromFunction3((t0: /* event */ ReactTouchEventFrom[HTMLDivElement] | ReactMouseEventFrom[HTMLDivElement], t1: /* import warning: transforms.QualifyReferences#resolveTypeRef many Couldn't qualify Object */ /* data */ js.Any, t2: /* target */ HTMLElement) => _sync.runSync(value(t0, t1, t2))))
+      ): Self = StObject.set(x, "onClick", js.Any.fromFunction3((t0: /* event */ ReactTouchEventFrom[HTMLDivElement] | ReactMouseEventFrom[HTMLDivElement], t1: /* import warning: transforms.QualifyReferences#resolveTypeRef many Couldn't qualify Object */ /* data */ js.Any, t2: /* target */ HTMLElement) => implicitly[Sync[F]].runSync(value(t0, t1, t2))))
       
       inline def setOnClickUndefined: Self = StObject.set(x, "onClick", js.undefined)
       

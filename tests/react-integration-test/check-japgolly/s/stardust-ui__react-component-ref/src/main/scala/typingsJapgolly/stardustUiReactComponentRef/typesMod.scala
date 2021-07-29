@@ -38,7 +38,7 @@ object typesMod {
       
       inline def setInnerRef(value: Ref[js.Any]): Self = StObject.set(x, "innerRef", value.asInstanceOf[js.Any])
       
-      inline def setInnerRefFunction1[F[_]](value: /* instance */ js.Any | Null => F[Unit])(implicit _sync: Sync[F]): Self = StObject.set(x, "innerRef", js.Any.fromFunction1((t0: /* instance */ js.Any | Null) => _sync.runSync(value(t0))))
+      inline def setInnerRefFunction1[F[_]: Sync](value: /* instance */ js.Any | Null => F[Unit]): Self = StObject.set(x, "innerRef", js.Any.fromFunction1((t0: /* instance */ js.Any | Null) => implicitly[Sync[F]].runSync(value(t0))))
       
       inline def setInnerRefNull: Self = StObject.set(x, "innerRef", null)
     }

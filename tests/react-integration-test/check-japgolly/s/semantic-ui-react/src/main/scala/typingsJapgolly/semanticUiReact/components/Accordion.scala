@@ -78,11 +78,9 @@ object Accordion {
     
     inline def inverted(value: Boolean): this.type = set("inverted", value.asInstanceOf[js.Any])
     
-    inline def onTitleClick[F[_]](
+    inline def onTitleClick[F[_]: Sync](
       value: (/* event */ ReactMouseEventFrom[HTMLDivElement], /* data */ AccordionTitleProps) => F[Unit]
-    )(
-      implicit _sync: Sync[F]
-    ): this.type = set("onTitleClick", js.Any.fromFunction2((t0: /* event */ ReactMouseEventFrom[HTMLDivElement], t1: /* data */ AccordionTitleProps) => _sync.runSync(value(t0, t1))))
+    ): this.type = set("onTitleClick", js.Any.fromFunction2((t0: /* event */ ReactMouseEventFrom[HTMLDivElement], t1: /* data */ AccordionTitleProps) => implicitly[Sync[F]].runSync(value(t0, t1))))
     
     inline def panels(value: SemanticShorthandCollection[AccordionPanelProps]): this.type = set("panels", value.asInstanceOf[js.Any])
     

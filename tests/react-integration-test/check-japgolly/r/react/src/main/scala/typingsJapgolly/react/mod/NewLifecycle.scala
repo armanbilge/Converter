@@ -36,11 +36,7 @@ object NewLifecycle {
   
   extension [Self <: NewLifecycle[?, ?, ?], P, S, SS](x: Self & (NewLifecycle[P, S, SS])) {
     
-    inline def setComponentDidUpdate[F[_]](
-      value: (/* prevProps */ P, /* prevState */ S, /* snapshot */ js.UndefOr[SS]) => F[Unit]
-    )(
-      implicit _sync: Sync[F]
-    ): Self = StObject.set(x, "componentDidUpdate", js.Any.fromFunction3((t0: /* prevProps */ P, t1: /* prevState */ S, t2: /* snapshot */ js.UndefOr[SS]) => _sync.runSync(value(t0, t1, t2))))
+    inline def setComponentDidUpdate[F[_]: Sync](value: (/* prevProps */ P, /* prevState */ S, /* snapshot */ js.UndefOr[SS]) => F[Unit]): Self = StObject.set(x, "componentDidUpdate", js.Any.fromFunction3((t0: /* prevProps */ P, t1: /* prevState */ S, t2: /* snapshot */ js.UndefOr[SS]) => implicitly[Sync[F]].runSync(value(t0, t1, t2))))
     
     inline def setComponentDidUpdateUndefined: Self = StObject.set(x, "componentDidUpdate", js.undefined)
     

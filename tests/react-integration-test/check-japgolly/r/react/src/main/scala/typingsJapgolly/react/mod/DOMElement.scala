@@ -25,7 +25,7 @@ object DOMElement {
     
     inline def setRef(value: LegacyRef[T]): Self = StObject.set(x, "ref", value.asInstanceOf[js.Any])
     
-    inline def setRefFunction1[F[_]](value: /* instance */ T | Null => F[Unit])(implicit _sync: Sync[F]): Self = StObject.set(x, "ref", js.Any.fromFunction1((t0: /* instance */ T | Null) => _sync.runSync(value(t0))))
+    inline def setRefFunction1[F[_]: Sync](value: /* instance */ T | Null => F[Unit]): Self = StObject.set(x, "ref", js.Any.fromFunction1((t0: /* instance */ T | Null) => implicitly[Sync[F]].runSync(value(t0))))
     
     inline def setRefNull: Self = StObject.set(x, "ref", null)
   }

@@ -31,7 +31,7 @@ object ContextMenu {
     
     inline def hideOnLeave(value: Boolean): this.type = set("hideOnLeave", value.asInstanceOf[js.Any])
     
-    inline def onHide[F[_]](value: /* event */ js.Any => F[Unit])(implicit _sync: Sync[F]): this.type = set("onHide", js.Any.fromFunction1((t0: /* event */ js.Any) => _sync.runSync(value(t0))))
+    inline def onHide[F[_]: Sync](value: /* event */ js.Any => F[Unit]): this.type = set("onHide", js.Any.fromFunction1((t0: /* event */ js.Any) => implicitly[Sync[F]].runSync(value(t0))))
     
     inline def onMouseLeave(
       value: (js.Function3[
@@ -42,13 +42,11 @@ object ContextMenu {
         ]) | js.Function
     ): this.type = set("onMouseLeave", value.asInstanceOf[js.Any])
     
-    inline def onMouseLeaveFunction3[F[_]](
+    inline def onMouseLeaveFunction3[F[_]: Sync](
       value: (/* event */ ReactMouseEventFrom[HTMLElement], /* import warning: transforms.QualifyReferences#resolveTypeRef many Couldn't qualify Object */ /* data */ js.Any, /* target */ HTMLElement) => F[Unit]
-    )(
-      implicit _sync: Sync[F]
-    ): this.type = set("onMouseLeave", js.Any.fromFunction3((t0: /* event */ ReactMouseEventFrom[HTMLElement], t1: /* import warning: transforms.QualifyReferences#resolveTypeRef many Couldn't qualify Object */ /* data */ js.Any, t2: /* target */ HTMLElement) => _sync.runSync(value(t0, t1, t2))))
+    ): this.type = set("onMouseLeave", js.Any.fromFunction3((t0: /* event */ ReactMouseEventFrom[HTMLElement], t1: /* import warning: transforms.QualifyReferences#resolveTypeRef many Couldn't qualify Object */ /* data */ js.Any, t2: /* target */ HTMLElement) => implicitly[Sync[F]].runSync(value(t0, t1, t2))))
     
-    inline def onShow[F[_]](value: /* event */ js.Any => F[Unit])(implicit _sync: Sync[F]): this.type = set("onShow", js.Any.fromFunction1((t0: /* event */ js.Any) => _sync.runSync(value(t0))))
+    inline def onShow[F[_]: Sync](value: /* event */ js.Any => F[Unit]): this.type = set("onShow", js.Any.fromFunction1((t0: /* event */ js.Any) => implicitly[Sync[F]].runSync(value(t0))))
     
     inline def rtl(value: Boolean): this.type = set("rtl", value.asInstanceOf[js.Any])
   }

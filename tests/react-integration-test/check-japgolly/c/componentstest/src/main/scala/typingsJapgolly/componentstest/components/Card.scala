@@ -33,7 +33,7 @@ object Card {
     extends AnyVal
        with StBuildingComponent[js.Object] {
     
-    inline def onClick[F[_]](value: ReactMouseEventFrom[HTMLDivElement & Element] => F[Unit])(implicit _sync: Sync[F]): this.type = set("onClick", js.Any.fromFunction1((t0: ReactMouseEventFrom[HTMLDivElement & Element]) => _sync.runSync(value(t0))))
+    inline def onClick[F[_]: Sync](value: ReactMouseEventFrom[HTMLDivElement & Element] => F[Unit]): this.type = set("onClick", js.Any.fromFunction1((t0: ReactMouseEventFrom[HTMLDivElement & Element]) => implicitly[Sync[F]].runSync(value(t0))))
     
     inline def prefixCls(value: String): this.type = set("prefixCls", value.asInstanceOf[js.Any])
   }

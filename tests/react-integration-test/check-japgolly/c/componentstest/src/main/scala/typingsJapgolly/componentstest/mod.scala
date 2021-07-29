@@ -42,14 +42,14 @@ object mod {
   }
   object A {
     
-    inline def apply[F[_]](aCallback: F[Double], aMember: Double)(implicit _sync: Sync[F]): A = {
-      val __obj = js.Dynamic.literal(aCallback = _sync.toJsFn(aCallback), aMember = aMember.asInstanceOf[js.Any])
+    inline def apply[F[_]: Sync](aCallback: F[Double], aMember: Double): A = {
+      val __obj = js.Dynamic.literal(aCallback = implicitly[Sync[F]].toJsFn(aCallback), aMember = aMember.asInstanceOf[js.Any])
       __obj.asInstanceOf[A]
     }
     
     extension [Self <: A](x: Self) {
       
-      inline def setACallback[F[_]](value: F[Double])(implicit _sync: Sync[F]): Self = StObject.set(x, "aCallback", _sync.toJsFn(value))
+      inline def setACallback[F[_]: Sync](value: F[Double]): Self = StObject.set(x, "aCallback", implicitly[Sync[F]].toJsFn(value))
       
       inline def setAMember(value: Double): Self = StObject.set(x, "aMember", value.asInstanceOf[js.Any])
     }
@@ -72,7 +72,7 @@ object mod {
     
     extension [Self <: B](x: Self) {
       
-      inline def setBCallback[F[_]](value: F[String])(implicit _sync: Sync[F]): Self = StObject.set(x, "bCallback", _sync.toJsFn(value))
+      inline def setBCallback[F[_]: Sync](value: F[String]): Self = StObject.set(x, "bCallback", implicitly[Sync[F]].toJsFn(value))
       
       inline def setBCallbackUndefined: Self = StObject.set(x, "bCallback", js.undefined)
       
@@ -141,7 +141,7 @@ object mod {
     
     extension [Self <: CardProps](x: Self) {
       
-      inline def setOnClick[F[_]](value: ReactMouseEventFrom[HTMLDivElement & Element] => F[Unit])(implicit _sync: Sync[F]): Self = StObject.set(x, "onClick", js.Any.fromFunction1((t0: ReactMouseEventFrom[HTMLDivElement & Element]) => _sync.runSync(value(t0))))
+      inline def setOnClick[F[_]: Sync](value: ReactMouseEventFrom[HTMLDivElement & Element] => F[Unit]): Self = StObject.set(x, "onClick", js.Any.fromFunction1((t0: ReactMouseEventFrom[HTMLDivElement & Element]) => implicitly[Sync[F]].runSync(value(t0))))
       
       inline def setOnClickUndefined: Self = StObject.set(x, "onClick", js.undefined)
       
@@ -158,8 +158,8 @@ object mod {
   trait Props extends StObject
   object Props {
     
-    inline def A[F[_]](aCallback: F[Double], aMember: Double)(implicit _sync: Sync[F]): typingsJapgolly.componentstest.mod.A = {
-      val __obj = js.Dynamic.literal(aCallback = _sync.toJsFn(aCallback), aMember = aMember.asInstanceOf[js.Any])
+    inline def A[F[_]: Sync](aCallback: F[Double], aMember: Double): typingsJapgolly.componentstest.mod.A = {
+      val __obj = js.Dynamic.literal(aCallback = implicitly[Sync[F]].toJsFn(aCallback), aMember = aMember.asInstanceOf[js.Any])
       __obj.asInstanceOf[typingsJapgolly.componentstest.mod.A]
     }
     

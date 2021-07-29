@@ -16,13 +16,13 @@ trait ComponentSpec[P, S]
 }
 object ComponentSpec {
   
-  inline def apply[F[_], P, S](render: F[Node])(implicit _sync: Sync[F]): ComponentSpec[P, S] = {
-    val __obj = js.Dynamic.literal(render = _sync.toJsFn(render))
+  inline def apply[F[_]: Sync, P, S](render: F[Node]): ComponentSpec[P, S] = {
+    val __obj = js.Dynamic.literal(render = implicitly[Sync[F]].toJsFn(render))
     __obj.asInstanceOf[ComponentSpec[P, S]]
   }
   
   extension [Self <: ComponentSpec[?, ?], P, S](x: Self & (ComponentSpec[P, S])) {
     
-    inline def setRender[F[_]](value: F[Node])(implicit _sync: Sync[F]): Self = StObject.set(x, "render", _sync.toJsFn(value))
+    inline def setRender[F[_]: Sync](value: F[Node]): Self = StObject.set(x, "render", implicitly[Sync[F]].toJsFn(value))
   }
 }

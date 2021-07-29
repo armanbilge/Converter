@@ -51,59 +51,41 @@ object ReactDropzone {
     
     inline def noKeyboard(value: Boolean): this.type = set("noKeyboard", value.asInstanceOf[js.Any])
     
-    inline def onDragEnter[F[_]](
-      value: ReactDragEventFrom[HTMLElement & org.scalajs.dom.raw.Element] => F[Unit]
-    )(
-      implicit _sync: Sync[F]
-    ): this.type = set("onDragEnter", js.Any.fromFunction1((t0: ReactDragEventFrom[HTMLElement & org.scalajs.dom.raw.Element]) => _sync.runSync(value(t0))))
+    inline def onDragEnter[F[_]: Sync](value: ReactDragEventFrom[HTMLElement & org.scalajs.dom.raw.Element] => F[Unit]): this.type = set("onDragEnter", js.Any.fromFunction1((t0: ReactDragEventFrom[HTMLElement & org.scalajs.dom.raw.Element]) => implicitly[Sync[F]].runSync(value(t0))))
     
-    inline def onDragLeave[F[_]](
-      value: ReactDragEventFrom[HTMLElement & org.scalajs.dom.raw.Element] => F[Unit]
-    )(
-      implicit _sync: Sync[F]
-    ): this.type = set("onDragLeave", js.Any.fromFunction1((t0: ReactDragEventFrom[HTMLElement & org.scalajs.dom.raw.Element]) => _sync.runSync(value(t0))))
+    inline def onDragLeave[F[_]: Sync](value: ReactDragEventFrom[HTMLElement & org.scalajs.dom.raw.Element] => F[Unit]): this.type = set("onDragLeave", js.Any.fromFunction1((t0: ReactDragEventFrom[HTMLElement & org.scalajs.dom.raw.Element]) => implicitly[Sync[F]].runSync(value(t0))))
     
-    inline def onDragOver[F[_]](
-      value: ReactDragEventFrom[HTMLElement & org.scalajs.dom.raw.Element] => F[Unit]
-    )(
-      implicit _sync: Sync[F]
-    ): this.type = set("onDragOver", js.Any.fromFunction1((t0: ReactDragEventFrom[HTMLElement & org.scalajs.dom.raw.Element]) => _sync.runSync(value(t0))))
+    inline def onDragOver[F[_]: Sync](value: ReactDragEventFrom[HTMLElement & org.scalajs.dom.raw.Element] => F[Unit]): this.type = set("onDragOver", js.Any.fromFunction1((t0: ReactDragEventFrom[HTMLElement & org.scalajs.dom.raw.Element]) => implicitly[Sync[F]].runSync(value(t0))))
     
-    inline def onDrop[F[_]](
+    inline def onDrop[F[_]: Sync](
       value: (/* acceptedFiles */ js.Array[
           /* import warning: transforms.QualifyReferences#resolveTypeRef many Couldn't qualify File */ js.Any
         ], /* rejectedFiles */ js.Array[
           /* import warning: transforms.QualifyReferences#resolveTypeRef many Couldn't qualify File */ js.Any
         ], /* event */ DropEvent) => F[Unit]
-    )(
-      implicit _sync: Sync[F]
     ): this.type = set("onDrop", js.Any.fromFunction3((t0: /* acceptedFiles */ js.Array[
           /* import warning: transforms.QualifyReferences#resolveTypeRef many Couldn't qualify File */ js.Any
         ], t1: /* rejectedFiles */ js.Array[
           /* import warning: transforms.QualifyReferences#resolveTypeRef many Couldn't qualify File */ js.Any
-        ], t2: /* event */ DropEvent) => _sync.runSync(value(t0, t1, t2))))
+        ], t2: /* event */ DropEvent) => implicitly[Sync[F]].runSync(value(t0, t1, t2))))
     
-    inline def onDropAccepted[F[_]](
+    inline def onDropAccepted[F[_]: Sync](
       value: (/* files */ js.Array[
           /* import warning: transforms.QualifyReferences#resolveTypeRef many Couldn't qualify File */ js.Any
         ], /* event */ DropEvent) => F[Unit]
-    )(
-      implicit _sync: Sync[F]
     ): this.type = set("onDropAccepted", js.Any.fromFunction2((t0: /* files */ js.Array[
           /* import warning: transforms.QualifyReferences#resolveTypeRef many Couldn't qualify File */ js.Any
-        ], t1: /* event */ DropEvent) => _sync.runSync(value(t0, t1))))
+        ], t1: /* event */ DropEvent) => implicitly[Sync[F]].runSync(value(t0, t1))))
     
-    inline def onDropRejected[F[_]](
+    inline def onDropRejected[F[_]: Sync](
       value: (/* files */ js.Array[
           /* import warning: transforms.QualifyReferences#resolveTypeRef many Couldn't qualify File */ js.Any
         ], /* event */ DropEvent) => F[Unit]
-    )(
-      implicit _sync: Sync[F]
     ): this.type = set("onDropRejected", js.Any.fromFunction2((t0: /* files */ js.Array[
           /* import warning: transforms.QualifyReferences#resolveTypeRef many Couldn't qualify File */ js.Any
-        ], t1: /* event */ DropEvent) => _sync.runSync(value(t0, t1))))
+        ], t1: /* event */ DropEvent) => implicitly[Sync[F]].runSync(value(t0, t1))))
     
-    inline def onFileDialogCancel[F[_]](value: F[Unit])(implicit _sync: Sync[F]): this.type = set("onFileDialogCancel", _sync.toJsFn(value))
+    inline def onFileDialogCancel[F[_]: Sync](value: F[Unit]): this.type = set("onFileDialogCancel", implicitly[Sync[F]].toJsFn(value))
     
     inline def preventDropOnDocument(value: Boolean): this.type = set("preventDropOnDocument", value.asInstanceOf[js.Any])
   }

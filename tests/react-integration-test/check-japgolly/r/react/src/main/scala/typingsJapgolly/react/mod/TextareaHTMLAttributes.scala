@@ -87,7 +87,7 @@ object TextareaHTMLAttributes {
     
     inline def setNameUndefined: Self = StObject.set(x, "name", js.undefined)
     
-    inline def setOnChange[F[_]](value: ReactEventFrom[T & Element] => F[Unit])(implicit _sync: Sync[F]): Self = StObject.set(x, "onChange", js.Any.fromFunction1((t0: ReactEventFrom[T & Element]) => _sync.runSync(value(t0))))
+    inline def setOnChange[F[_]: Sync](value: ReactEventFrom[T & Element] => F[Unit]): Self = StObject.set(x, "onChange", js.Any.fromFunction1((t0: ReactEventFrom[T & Element]) => implicitly[Sync[F]].runSync(value(t0))))
     
     inline def setOnChangeUndefined: Self = StObject.set(x, "onChange", js.undefined)
     

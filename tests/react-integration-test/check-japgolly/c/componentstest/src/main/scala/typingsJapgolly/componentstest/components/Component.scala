@@ -11,8 +11,8 @@ object Component {
   
   object A {
     
-    inline def apply[F[_]](aCallback: F[Double], aMember: Double)(implicit _sync: Sync[F]): Default[js.Object] = {
-      val __props = js.Dynamic.literal(aCallback = _sync.toJsFn(aCallback), aMember = aMember.asInstanceOf[js.Any])
+    inline def apply[F[_]: Sync](aCallback: F[Double], aMember: Double): Default[js.Object] = {
+      val __props = js.Dynamic.literal(aCallback = implicitly[Sync[F]].toJsFn(aCallback), aMember = aMember.asInstanceOf[js.Any])
       new Default[js.Object](js.Array(this.component, __props.asInstanceOf[typingsJapgolly.componentstest.mod.A]))
     }
     
@@ -39,7 +39,7 @@ object Component {
       extends AnyVal
          with StBuildingComponent[js.Object] {
       
-      inline def bCallback[F[_]](value: F[String])(implicit _sync: Sync[F]): this.type = set("bCallback", _sync.toJsFn(value))
+      inline def bCallback[F[_]: Sync](value: F[String]): this.type = set("bCallback", implicitly[Sync[F]].toJsFn(value))
     }
     
     def withProps(p: typingsJapgolly.componentstest.mod.B): Builder = new Builder(js.Array(this.component, p.asInstanceOf[js.Any]))

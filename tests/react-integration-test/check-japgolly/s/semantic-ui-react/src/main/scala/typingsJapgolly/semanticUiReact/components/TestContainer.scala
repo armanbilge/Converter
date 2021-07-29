@@ -15,15 +15,13 @@ import scala.scalajs.js.annotation.{JSGlobalScope, JSGlobal, JSImport, JSName, J
 
 object TestContainer {
   
-  inline def apply[F[_]](
+  inline def apply[F[_]: Sync](
     requiredFn0Number: F[Double],
     requiredFn0Void: F[Unit],
     requiredFn1Number: Double => Double,
     requiredFn1Void: Double => F[Unit]
-  )(
-    implicit _sync: Sync[F]
   ): Builder = {
-    val __props = js.Dynamic.literal(requiredFn0Number = _sync.toJsFn(requiredFn0Number), requiredFn0Void = _sync.toJsFn(requiredFn0Void), requiredFn1Number = js.Any.fromFunction1(requiredFn1Number), requiredFn1Void = js.Any.fromFunction1((t0: Double) => _sync.runSync(requiredFn1Void(t0))))
+    val __props = js.Dynamic.literal(requiredFn0Number = implicitly[Sync[F]].toJsFn(requiredFn0Number), requiredFn0Void = implicitly[Sync[F]].toJsFn(requiredFn0Void), requiredFn1Number = js.Any.fromFunction1(requiredFn1Number), requiredFn1Void = js.Any.fromFunction1((t0: Double) => implicitly[Sync[F]].runSync(requiredFn1Void(t0))))
     new Builder(js.Array(this.component, __props.asInstanceOf[TestContainerProps]))
   }
   
@@ -50,13 +48,13 @@ object TestContainer {
     
     inline def fluid(value: Boolean): this.type = set("fluid", value.asInstanceOf[js.Any])
     
-    inline def optFn0Number[F[_]](value: F[Double])(implicit _sync: Sync[F]): this.type = set("optFn0Number", _sync.toJsFn(value))
+    inline def optFn0Number[F[_]: Sync](value: F[Double]): this.type = set("optFn0Number", implicitly[Sync[F]].toJsFn(value))
     
-    inline def optFn0Void[F[_]](value: F[Unit])(implicit _sync: Sync[F]): this.type = set("optFn0Void", _sync.toJsFn(value))
+    inline def optFn0Void[F[_]: Sync](value: F[Unit]): this.type = set("optFn0Void", implicitly[Sync[F]].toJsFn(value))
     
     inline def optFn1Number(value: /* x */ Double => Double): this.type = set("optFn1Number", js.Any.fromFunction1(value))
     
-    inline def optFn1Void[F[_]](value: /* x */ Double => F[Unit])(implicit _sync: Sync[F]): this.type = set("optFn1Void", js.Any.fromFunction1((t0: /* x */ Double) => _sync.runSync(value(t0))))
+    inline def optFn1Void[F[_]: Sync](value: /* x */ Double => F[Unit]): this.type = set("optFn1Void", js.Any.fromFunction1((t0: /* x */ Double) => implicitly[Sync[F]].runSync(value(t0))))
     
     inline def text(value: Boolean): this.type = set("text", value.asInstanceOf[js.Any])
     

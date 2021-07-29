@@ -57,9 +57,7 @@ class SharedBuilder_AccordionTitleProps_248880662[R <: js.Object] (val args: js.
   
   inline def index(value: Double | String): this.type = set("index", value.asInstanceOf[js.Any])
   
-  inline def onClick[F[_]](
+  inline def onClick[F[_]: Sync](
     value: (/* event */ ReactMouseEventFrom[HTMLDivElement], /* data */ AccordionTitleProps) => F[Unit]
-  )(
-    implicit _sync: Sync[F]
-  ): this.type = set("onClick", js.Any.fromFunction2((t0: /* event */ ReactMouseEventFrom[HTMLDivElement], t1: /* data */ AccordionTitleProps) => _sync.runSync(value(t0, t1))))
+  ): this.type = set("onClick", js.Any.fromFunction2((t0: /* event */ ReactMouseEventFrom[HTMLDivElement], t1: /* data */ AccordionTitleProps) => implicitly[Sync[F]].runSync(value(t0, t1))))
 }

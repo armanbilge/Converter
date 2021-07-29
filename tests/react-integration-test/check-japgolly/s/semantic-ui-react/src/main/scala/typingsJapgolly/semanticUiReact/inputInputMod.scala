@@ -231,11 +231,7 @@ object inputInputMod {
       
       inline def setLoadingUndefined: Self = StObject.set(x, "loading", js.undefined)
       
-      inline def setOnChange[F[_]](
-        value: (/* event */ ReactEventFrom[HTMLInputElement], /* data */ InputOnChangeData) => F[Unit]
-      )(
-        implicit _sync: Sync[F]
-      ): Self = StObject.set(x, "onChange", js.Any.fromFunction2((t0: /* event */ ReactEventFrom[HTMLInputElement], t1: /* data */ InputOnChangeData) => _sync.runSync(value(t0, t1))))
+      inline def setOnChange[F[_]: Sync](value: (/* event */ ReactEventFrom[HTMLInputElement], /* data */ InputOnChangeData) => F[Unit]): Self = StObject.set(x, "onChange", js.Any.fromFunction2((t0: /* event */ ReactEventFrom[HTMLInputElement], t1: /* data */ InputOnChangeData) => implicitly[Sync[F]].runSync(value(t0, t1))))
       
       inline def setOnChangeUndefined: Self = StObject.set(x, "onChange", js.undefined)
       

@@ -47,11 +47,11 @@ object Mixin {
     
     inline def setDisplayNameUndefined: Self = StObject.set(x, "displayName", js.undefined)
     
-    inline def setGetDefaultProps[F[_]](value: F[P])(implicit _sync: Sync[F]): Self = StObject.set(x, "getDefaultProps", _sync.toJsFn(value))
+    inline def setGetDefaultProps[F[_]: Sync](value: F[P]): Self = StObject.set(x, "getDefaultProps", implicitly[Sync[F]].toJsFn(value))
     
     inline def setGetDefaultPropsUndefined: Self = StObject.set(x, "getDefaultProps", js.undefined)
     
-    inline def setGetInitialState[F[_]](value: F[S])(implicit _sync: Sync[F]): Self = StObject.set(x, "getInitialState", _sync.toJsFn(value))
+    inline def setGetInitialState[F[_]: Sync](value: F[S]): Self = StObject.set(x, "getInitialState", implicitly[Sync[F]].toJsFn(value))
     
     inline def setGetInitialStateUndefined: Self = StObject.set(x, "getInitialState", js.undefined)
     

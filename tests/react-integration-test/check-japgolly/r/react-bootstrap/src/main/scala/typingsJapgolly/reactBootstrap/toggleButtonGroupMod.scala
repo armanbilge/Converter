@@ -77,7 +77,7 @@ object toggleButtonGroupMod {
       
       inline def setNameUndefined: Self = StObject.set(x, "name", js.undefined)
       
-      inline def setOnChange[F[_]](value: /* values */ js.Array[js.Any] => F[Unit])(implicit _sync: Sync[F]): Self = StObject.set(x, "onChange", js.Any.fromFunction1((t0: /* values */ js.Array[js.Any]) => _sync.runSync(value(t0))))
+      inline def setOnChange[F[_]: Sync](value: /* values */ js.Array[js.Any] => F[Unit]): Self = StObject.set(x, "onChange", js.Any.fromFunction1((t0: /* values */ js.Array[js.Any]) => implicitly[Sync[F]].runSync(value(t0))))
       
       inline def setOnChangeUndefined: Self = StObject.set(x, "onChange", js.undefined)
       
@@ -106,7 +106,7 @@ object toggleButtonGroupMod {
       
       inline def setName(value: String): Self = StObject.set(x, "name", value.asInstanceOf[js.Any])
       
-      inline def setOnChange[F[_]](value: /* value */ js.Any => F[Unit])(implicit _sync: Sync[F]): Self = StObject.set(x, "onChange", js.Any.fromFunction1((t0: /* value */ js.Any) => _sync.runSync(value(t0))))
+      inline def setOnChange[F[_]: Sync](value: /* value */ js.Any => F[Unit]): Self = StObject.set(x, "onChange", js.Any.fromFunction1((t0: /* value */ js.Any) => implicitly[Sync[F]].runSync(value(t0))))
       
       inline def setOnChangeUndefined: Self = StObject.set(x, "onChange", js.undefined)
       

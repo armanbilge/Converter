@@ -280,11 +280,7 @@ object buttonMod {
       
       inline def setNegativeUndefined: Self = StObject.set(x, "negative", js.undefined)
       
-      inline def setOnClick[F[_]](
-        value: (/* event */ ReactMouseEventFrom[HTMLButtonElement], /* data */ ButtonProps) => F[Unit]
-      )(
-        implicit _sync: Sync[F]
-      ): Self = StObject.set(x, "onClick", js.Any.fromFunction2((t0: /* event */ ReactMouseEventFrom[HTMLButtonElement], t1: /* data */ ButtonProps) => _sync.runSync(value(t0, t1))))
+      inline def setOnClick[F[_]: Sync](value: (/* event */ ReactMouseEventFrom[HTMLButtonElement], /* data */ ButtonProps) => F[Unit]): Self = StObject.set(x, "onClick", js.Any.fromFunction2((t0: /* event */ ReactMouseEventFrom[HTMLButtonElement], t1: /* data */ ButtonProps) => implicitly[Sync[F]].runSync(value(t0, t1))))
       
       inline def setOnClickUndefined: Self = StObject.set(x, "onClick", js.undefined)
       
